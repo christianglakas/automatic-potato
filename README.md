@@ -32,19 +32,19 @@ Follow these steps to import the database structure and sample data.
    CREATE DATABASE portfolio_db;
    EXIT;
    ```
-4. Import the script file (`script.sql`) into your new database:
+4. Import the script file (`create_statements_mysql.sql`) into your new database:
    ```bash
-   mysql -u root -p portfolio_db < script.sql
+   mysql -u root -p portfolio_db < create_statements_mysql.sql
    ```
 
 ### Option 2: Via MySQL Workbench
 1. Open MySQL Workbench and connect to your database instance.
 2. Go to the top menu and select **File** ➔ **Open SQL Script...**
-3. Select `script.sql` from your local machine.
+3. Select `create_statements_mysql.sql` from your local machine.
 4. If the script does not contain a `CREATE DATABASE` statement at the top, add this to the very first line of the query editor:
    ```sql
-   CREATE DATABASE IF NOT EXISTS portfolio_db;
-   USE portfolio_db;
+   CREATE DATABASE IF NOT EXISTS maven_advanced_sql;
+   USE maven_advanced_sql;
    ```
 5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
 
