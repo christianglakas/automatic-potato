@@ -41,9 +41,9 @@ Follow these steps to import the database structure and sample data.
 1. Open MySQL Workbench and connect to your database instance.
 2. Go to the top menu and select **File** ➔ **Open SQL Script...**
 3. Select `create_statements_mysql.sql` from your local machine.
-4. If the script does not contain a `CREATE DATABASE` statement at the top, add this to the very first line of the query editor:
+4. The script contains a `CREATE SCHEMA` statement at the top on line 3:
    ```sql
-   CREATE DATABASE IF NOT EXISTS maven_advanced_sql;
+   CREATE SCHEMA maven_advanced_sql;
    USE maven_advanced_sql;
    ```
 5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
@@ -52,9 +52,9 @@ Follow these steps to import the database structure and sample data.
 
 The imported database consists of the following tables, built to demonstrate standard relational database design (including primary and foreign key constraints):
 
-* **`table_name_1`** - [Brief description, e.g., Stores customer profile information.]
-* **`table_name_2`** - [Brief description, e.g., Tracks transactional order details linked to customers.]
-* **`table_name_3`** - [Brief description, e.g., Contains product inventory and pricing records.]
+* **`country_stats`** - [Brief description, e.g., Stores customer profile information.]
+* **`customers`** - [Brief description, e.g., Tracks transactional order details linked to customers.]
+* **`employees`** - [Brief description, e.g., Contains product inventory and pricing records.]
 
 ## Demonstration Queries
 
