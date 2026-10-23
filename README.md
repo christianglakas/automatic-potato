@@ -29,12 +29,12 @@ Follow these steps to import the database structure and sample data.
    ```
 3. Create the target database and exit:
    ```sql
-   CREATE DATABASE portfolio_db;
+   CREATE DATABASE maven_advanced_sql;
    EXIT;
    ```
 4. Import the script file (`create_statements_mysql.sql`) into your new database:
    ```bash
-   mysql -u root -p portfolio_db < create_statements_mysql.sql
+   mysql -u root -p maven_advanced_sql < create_statements_mysql.sql
    ```
 
 ### Option 2: Via MySQL Workbench
