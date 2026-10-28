@@ -1,5 +1,6 @@
 # automatic-potato
-### Commercial Operations & Database Optimization Demo by Christian Glakas
+## Commercial Operations & Database Optimization Demo 
+**by Christian Glakas**
 
 A comprehensive, production-ready SQL portfolio spanning five architectural domains. This repository showcases how targeted database engineering, query optimization, and advanced analytics transform raw relational schemas into highly performant, executive-ready commercial business intelligence.
 
