@@ -77,17 +77,32 @@ Below are the queries included in this project, categorized by purpose. They dem
   ```sql
   USE classicmodels;
   ```
-* **Query 2:** [Goal of query, e.g., Find all products priced over \$50.]
-
+* **Query 2:** [Base structural audit - Verify table presence.]
+ ```sql
+  SHOW TABLES;
+  ```
 ### Aggregations & Grouping (GROUP BY, HAVING, Aggregate Functions)
 * **Query 3:** [Goal of query, e.g., Calculate total sales revenue per product category.]
+  ```sql
+  
+  ```
 * **Query 4:** [Goal of query, e.g., Find customers who have placed more than 5 orders.]
-
+  ```sql
+  
+  ```
 ### Multi-Table Relations (INNER JOIN, LEFT JOIN)
 * **Query 5:** [Goal of query, e.g., Combine order data with customer details to view purchasing behavior.]
+  ```sql
+  
+  ```
+  
 * **Query 6:** [Goal of query, e.g., Identify products that have never been ordered using a LEFT JOIN.]
-
+  ```sql
+  
+  ```
 ### Text & Date Manipulation (LIKE, Date Functions)
 * **Query 7:** [Goal of query, e.g., Filter transactions that occurred strictly within the last quarter.]
-
+  ```sql
+  
+  ```
 *(Tip for the user: Paste your exact SQL query code blocks beneath each bullet point to show off your code directly in the README!)*
