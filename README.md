@@ -392,3 +392,96 @@ GROUP BY
 ORDER BY 
     customer_lifetime_revenue DESC;
 ```
+
+* **Query 4: Reporting Layer Validation & Base Architecture Audit**
+```mysql
+SELECT * FROM revenue_reporting_layer
+WHERE total_orders_placed > 2
+LIMIT 10;
+
+SHOW INDEX FROM customers;
+```
+
+* **Query 5: Global Market Index Engineering & Performance Simulation**
+```mysql
+CREATE INDEX idx_customer_location ON customers (country, city);
+
+EXPLAIN SELECT customerNumber, customerName FROM customers WHERE country = 'USA' AND city = 'NYC';
+
+DROP INDEX idx_customer_location ON customers;
+```
+
+
+### Category 5: STRING & DATE MANIPULATION
+
+* **Query 1: Unified Staff Directory & Security Handle Mapping**
+```mysql
+SELECT
+    UPPER(CONCAT(lastName, ', ', firstname)) AS standardized_staff_name,
+    jobTitle,
+    SUBSTRING_INDEX(email, '@', 1) AS internal_system_handle,
+    officeCode
+FROM employees
+ORDER BY standardized_staff_name
+LIMIT 10;
+```
+
+* **Query 2: Customer Database Integrity & Text Wrap Audit**
+```mysql
+SELECT
+    LEFT(customerName, 20) AS short_customer_name,
+    LENGTH(customerName) AS exact_byte_length
+FROM customers
+WHERE LENGTH(customerName) > 30;
+```
+
+* **Query 3: Multi-Year Order Fulfillment Speed & Efficiency Analysis**
+```mysql
+SELECT
+    YEAR(orderDate) AS calendar_year,
+    COUNT(orderNumber) AS total_shipped_orders,
+    ROUND(AVG(DATEDIFF(shippedDate, orderDate)), 1) AS avg_days_to_ship
+FROM orders
+WHERE status = 'Shipped'
+GROUP BY YEAR(orderDate)
+ORDER BY calendar_year;
+```
+
+* **Query 4: Holiday Season Sales & Fulfillment Audit**
+```mysql
+SELECT
+    orderNumber,
+    customerNumber,
+    orderDate,
+    MONTHNAME(orderDate) AS order_month,
+    status
+FROM orders
+WHERE YEAR(orderDate) = 2004 AND QUARTER(orderDate) = 4
+ORDER BY orderDate
+LIMIT 10;
+```
+
+* **Query 4, Part B: Holiday Season Sales & Fulfillment Audit - Pivot Table**
+```mysql
+SELECT 
+    COUNT(orderNumber) AS total_Q4_orders,
+    COUNT(CASE WHEN status = 'Shipped' THEN 1 END) AS status_shipped,
+    COUNT(CASE WHEN status = 'In Process' THEN 1 END) AS status_in_process,
+    COUNT(CASE WHEN status = 'Disputed' THEN 1 END) AS status_disputed,
+    COUNT(CASE WHEN status = 'Resolved' THEN 1 END) AS status_resolved,
+    COUNT(CASE WHEN status = 'On Hold' THEN 1 END) AS status_on_hold, 
+    COUNT(CASE WHEN status = 'Cancelled' THEN 1 END) AS status_cancelled,
+    COUNT(CASE WHEN status NOT IN ('Shipped', 'In Process', 'Disputed', 'Resolved', 'On Hold', 'Cancelled') THEN 1 END) AS status_unknown_or_error
+FROM (
+    SELECT
+        orderNumber,
+        customerNumber,
+        orderDate,
+        MONTHNAME(orderDate) AS order_month,
+        status
+    FROM orders
+    WHERE YEAR(orderDate) = 2004 AND QUARTER(orderDate) = 4
+    ORDER BY orderDate
+    ) Q4_orders
+;
+```
