@@ -154,10 +154,10 @@ SELECT
     od.productCode,
     od.quantityOrdered
 FROM customers c 
-	INNER JOIN orders o 
-		ON c.customerNumber = o.customerNumber
-	INNER JOIN orderdetails od 
-		ON o.orderNumber = od.orderNumber
+    INNER JOIN orders o 
+        ON c.customerNumber = o.customerNumber
+    INNER JOIN orderdetails od 
+        ON o.orderNumber = od.orderNumber
 ORDER BY c.customerNumber
 LIMIT 10;
 ```
@@ -211,16 +211,18 @@ SELECT
     pay_summary.total_paid,
     order_summary.total_items_ordered
 FROM (
-	SELECT customerNumber, SUM(amount) AS total_paid
-	FROM payments 
-	GROUP BY customerNumber
-) pay_summary 
+    SELECT customerNumber, SUM(amount) AS total_paid
+    FROM payments 
+    GROUP BY customerNumber
+    ) pay_summary
 INNER JOIN (
-	SELECT o.customerNumber, SUM(quantityOrdered) AS total_items_ordered
+    SELECT o.customerNumber, SUM(quantityOrdered) AS total_items_ordered
     FROM orders o
-    INNER JOIN orderdetails od ON o.orderNumber = od.orderNumber
+        INNER JOIN orderdetails od
+            ON o.orderNumber = od.orderNumber
     GROUP BY o.customerNumber
-) order_summary ON pay_summary.customerNumber = order_summary.customerNumber
+    ) order_summary
+    ON pay_summary.customerNumber = order_summary.customerNumber
 LIMIT 10;
 ```
 
@@ -232,12 +234,13 @@ SELECT
     SUM(CASE WHEN o.status = "Shipped" THEN od.quantityOrdered * od.priceEach ELSE 0 END) AS total_spend,
     SUM(CASE WHEN o.status = "Cancelled" THEN od.quantityOrdered * od.priceEach ELSE 0 END) AS total_cancelled_value
 FROM orders o
-	INNER JOIN orderDetails od
-		ON od.orderNumber = o.orderNumber
-	INNER JOIN customers c
-		ON c.customerNumber = o.customerNumber
-GROUP BY o.customerNumber,
-		 c.customerName
+    INNER JOIN orderDetails od
+        ON od.orderNumber = o.orderNumber
+    INNER JOIN customers c
+        ON c.customerNumber = o.customerNumber
+GROUP BY
+    o.customerNumber,
+    c.customerName
 HAVING total_cancelled_value > (total_spend * .20)   
 ORDER BY total_cancelled_value DESC;
 ```
@@ -251,7 +254,8 @@ SELECT
     CONCAT(mgr.firstName, ' ', mgr.lastName) AS supervisor_name,
     mgr.employeeNumber AS supervisor_id
 FROM employees emp
-	LEFT JOIN employees mgr ON emp.reportsTo = mgr.employeeNumber
+    LEFT JOIN employees mgr
+        ON emp.reportsTo = mgr.employeeNumber
 LIMIT 10;
 ```
 
@@ -266,13 +270,13 @@ SELECT
     od.priceEach AS final_sale_price,
     ROUND((1 - (od.priceEach / p.MSRP)) * 100, 5) AS exact_discount_percent
 FROM orderDetails od
-	INNER JOIN products p
-		ON od.productCode = p.productCode
+    INNER JOIN products p
+        ON od.productCode = p.productCode
         AND od.priceEach < (p.MSRP * 0.80)
-	INNER JOIN orders o 
-		ON o.orderNumber = od.orderNumber
+    INNER JOIN orders o 
+        ON o.orderNumber = od.orderNumber
     INNER JOIN customers c 
-		ON c.customerNumber = o.customerNumber
+        ON c.customerNumber = o.customerNumber
 ORDER BY exact_discount_percent DESC
 LIMIT 10;
 ```
@@ -281,10 +285,10 @@ LIMIT 10;
 ```mysql
 SELECT
     CASE
-		WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
-		WHEN country IN('USA', 'Canada') THEN 'North America'
-		WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'        	
-        ELSE 'Other Regions'
+	WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
+	WHEN country IN('USA', 'Canada') THEN 'North America'
+	WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'
+	ELSE 'Other Regions'
 	END AS continent,
     country,
     city,
@@ -293,10 +297,10 @@ FROM customers
 UNION
 SELECT
     CASE
-		WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
-		WHEN country IN('USA', 'Canada') THEN 'North America'
-		WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'        	
-        ELSE 'Other Regions'
+	WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
+	WHEN country IN('USA', 'Canada') THEN 'North America'
+	WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'
+	ELSE 'Other Regions'
 	END AS continent,
     country,
     city,
@@ -328,3 +332,63 @@ SET SQL_SAFE_UPDATES = 1;
 ROLLBACK;
 ```
 
+### Category 4: DATABASE OBJECTS & COMPLEX CONDITIONAL PIVOTS
+
+* **Query 1: Sovereign Market Fulfillment & Operational Risk Performance Indices**
+```mysql
+SELECT
+    c.country
+    COUNT(CASE WHEN o.status IS NOT NULL THEN 1 END) AS total_shipped,
+    COUNT(CASE WHEN o.status = 'Shipped' THEN 1 END) AS status_shipped,
+    COUNT(CASE WHEN o.status = 'In Process' THEN 1 END) AS status_in_process,
+    COUNT(CASE WHEN o.status = 'Disputed' THEN 1 END) AS status_disputed,
+    COUNT(CASE WHEN o.status = 'Resolved' THEN 1 END) AS status_resolved,
+    COUNT(CASE WHEN o.status = 'On Hold' THEN 1 END) AS status_on_hold, 
+    COUNT(CASE WHEN o.status = 'Cancelled' THEN 1 END) AS status_cancelled,
+    COUNT(CASE WHEN o.status NOT IN ('Shipped', 'In Process', 'Disputed', 'Resolved', 'On Hold', 'Cancelled') THEN 1 END) AS status_unknown_or_error
+FROM
+    customers c
+    INNER JOIN orders o
+        ON c.customerNumber = o.customerNumber
+GROUP BY c.country
+ORDER BY total_shipped DESC
+LIMIT 10;
+```
+
+* **Query 2: Order Basket Density & Fulfillment Complexity Analysis**
+```mysql
+SELECT num_unique_products_in_order,
+    COUNT(num_unique_products_in_order) AS count_orders_this_num_uniq_prod
+FROM (
+    SELECT
+        orderNumber,
+        COUNT(productCode) AS num_unique_products_in_order
+    FROM orderDetails
+    GROUP BY orderNumber
+    ) order_manifest_count
+GROUP BY num_unique_products_in_order
+ORDER BY num_unique_products_in_order DESC
+LIMIT 10;
+```
+
+* **Query 3: Enterprise Revenue Reporting Layer & Global Account Index**
+```mysql
+CREATE OR REPLACE VIEW revenue_reporting_layer AS
+SELECT
+    c.customerName,
+    c.customerNumber,
+    c.country,
+    COUNT(DISTINCT o.orderNumber) AS total_orders_placed,
+    SUM(od.quantityOrdered * od.priceEach) AS customer_lifetime_revenue 
+FROM customers c
+    LEFT JOIN orders o
+        ON c.customerNumber = o.customerNumber
+    LEFT JOIN orderdetails od
+        ON o.orderNumber = od.orderNumber
+GROUP BY 
+    c.customerName,
+    c.customerNumber,
+    c.country
+ORDER BY 
+    customer_lifetime_revenue DESC;
+```
