@@ -1,9 +1,10 @@
 # automatic-potato
-SQL demo for job applications
+Commercial Operations & Database Optimization Demo
+By **Christian Glakas**
 
 # Portfolio Database Project: MySQL Demonstration
 
-This project sets up a multi-table MySQL database designed to showcase core SQL proficiency. It initializes the database schema, populates it with sample data, and provides basic to advanced queries demonstrating essential data manipulation and analysis skills.
+A comprehensive, production-ready SQL portfolio spanning five architectural domains. This repository showcases how targeted database engineering, query optimization, and advanced analytics transform raw relational schemas into highly performant, executive-ready commercial business intelligence.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -43,7 +44,7 @@ Follow these steps to import the database structure and sample data.
 3. Select `01_classicmodels_schema.sql` from your local machine.
 4. The script contains a `CREATE DATABASE` statement at the top on line 8:
    ```sql
-   CREATE DATABASE  IF NOT EXISTS classicmodels;
+   CREATE DATABASE IF NOT EXISTS classicmodels;
    USE classicmodels;
    ```
 5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
@@ -63,10 +64,19 @@ The imported database consists of the following tables, built to demonstrate sta
 
 ## Demonstration Queries
 
-Below are the 10–15 core queries included in this project, categorized by complexity. They demonstrate proficiency in data retrieval, filtering, multi-table joins, and aggregations.
+### Project Architecture & Framework
 
-### Basic Data Retrieval (SELECT, WHERE, ORDER BY)
-* **Query 1:** [Goal of query, e.g., Retrieve all active customers sorted by registration date.]
+Below are the queries included in this project, categorized by purpose. They demonstrate proficiency in data query performance engineering, dynamic executive dashboarding, advanced data governance, program performance evaluation, and zero-footprint risk management.
+
+### Category 1: Environment Setup & Lookup Architecture
+* **Executive Summary:** Configures active workspace sessions and conducts baseline database discovery to verify schema integrity across primary business entities.
+* **Business Value:** Provides immediate, high-level visibility into the foundational building blocks of customer registries, logistics pipelines, product catalogs, and transactional ledger states.
+* **Technical Footprint:** `USE`, `SHOW TABLES`, structural data-sampling (`LIMIT`), and layout-safe text inspections (`LEFT`).
+  
+* **Query 1:** [System Initialization - Establish workspace.]
+  ```sql
+  USE classicmodels;
+  ```
 * **Query 2:** [Goal of query, e.g., Find all products priced over \$50.]
 
 ### Aggregations & Grouping (GROUP BY, HAVING, Aggregate Functions)
