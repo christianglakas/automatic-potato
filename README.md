@@ -78,7 +78,7 @@ Below are the queries included in this project, categorized by purpose. They dem
   USE classicmodels;
   ```
 * **Query 2:** [Base structural audit - Verify table presence.]
- ```sql
+  ```sql
   SHOW TABLES;
   ```
 ### Aggregations & Grouping (GROUP BY, HAVING, Aggregate Functions)
