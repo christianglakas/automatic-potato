@@ -68,7 +68,7 @@ The imported database consists of the following tables, built to demonstrate sta
 
 Below are the queries included in this project, categorized by purpose. They demonstrate proficiency in data query performance engineering, dynamic executive dashboarding, advanced data governance, program performance evaluation, and zero-footprint risk management.
 
-### Category 1: ENVIRONMENT SETUP & LOOKUP ARCHITECTURE
+### Category 1: Environment Setup & Lookup Architecture
 
 * **Query 1:** System Initialization - Establish workspace
 ```mysql
@@ -117,7 +117,7 @@ FROM orderdetails
 LIMIT 5;
 ```
 
-### Category 2: BUSINESS AGGREGATIONS & DESCRIPTIVE STATISTICS
+### Category 2: Business Aggregations & Descriptive Statistics
 
 * **Query 1: Basic Summary Metrics**
 ```mysql
@@ -202,7 +202,7 @@ ORDER BY max_amount_paid DESC
 LIMIT 5;
 ```
 
-### Category 3: HIGHER ORDER BUSINESS INTERSECTIONS & DATA MANIPULATION
+### Category 3: Higher Order Business Intersections & Data Manipulation
 
 * **Query 1: Total Payments & Items Ordered**
 ```mysql
@@ -332,7 +332,7 @@ SET SQL_SAFE_UPDATES = 1;
 ROLLBACK;
 ```
 
-### Category 4: DATABASE OBJECTS & COMPLEX CONDITIONAL PIVOTS
+### Category 4: Database Objects & Complex Conditional Pivots
 
 * **Query 1: Sovereign Market Fulfillment & Operational Risk Performance Indices**
 ```mysql
@@ -412,7 +412,7 @@ DROP INDEX idx_customer_location ON customers;
 ```
 
 
-### Category 5: STRING & DATE MANIPULATION
+### Category 5: String & Date Manipulation
 
 * **Query 1: Unified Staff Directory & Security Handle Mapping**
 ```mysql
