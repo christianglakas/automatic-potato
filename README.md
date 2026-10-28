@@ -3,7 +3,7 @@ SQL demo for job applications
 
 # Portfolio Database Project: MySQL Demonstration
 
-This project sets up a multi-table MySQL database designed to showcase core SQL proficiency. It initializes the database schema, populates it with sample data, and provides 10–15 practice queries demonstrating essential data manipulation and analysis skills.
+This project sets up a multi-table MySQL database designed to showcase core SQL proficiency. It initializes the database schema, populates it with sample data, and provides basic to advanced queries demonstrating essential data manipulation and analysis skills.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -29,22 +29,22 @@ Follow these steps to import the database structure and sample data.
    ```
 3. Create the target database and exit:
    ```sql
-   CREATE DATABASE maven_advanced_sql;
+   CREATE DATABASE classicmodels;
    EXIT;
    ```
-4. Import the script file (`create_statements_mysql.sql`) into your new database:
+4. Import the script file (`01_classicmodels_schema.sql`) into your new database:
    ```bash
-   mysql -u root -p maven_advanced_sql < create_statements_mysql.sql
+   mysql -u root -p classicmodels < 01_classicmodels_schema.sql
    ```
 
 ### Option 2: Via MySQL Workbench
 1. Open MySQL Workbench and connect to your database instance.
 2. Go to the top menu and select **File** ➔ **Open SQL Script...**
-3. Select `create_statements_mysql.sql` from your local machine.
-4. The script contains a `CREATE SCHEMA` statement at the top on line 3:
+3. Select `01_classicmodels_schema.sql` from your local machine.
+4. The script contains a `CREATE DATABASE` statement at the top on line 8:
    ```sql
-   CREATE SCHEMA maven_advanced_sql;
-   USE maven_advanced_sql;
+   CREATE DATABASE  IF NOT EXISTS classicmodels;
+   USE classicmodels;
    ```
 5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
 
@@ -52,9 +52,14 @@ Follow these steps to import the database structure and sample data.
 
 The imported database consists of the following tables, built to demonstrate standard relational database design (including primary and foreign key constraints):
 
-* **`country_stats`** - [Brief description, e.g., Stores customer profile information.]
-* **`customers`** - [Brief description, e.g., Tracks transactional order details linked to customers.]
-* **`employees`** - [Brief description, e.g., Contains product inventory and pricing records.]
+* **`customers`** - [Stores data on buyers including contact info, address, credit limits, and sales representatives.]
+* **`employees`** - [Holds staff details, email addresses, job titles, and the internal reporting hierarchy.]
+* **`offices`** - [Contains data on physical office locations, phone numbers, addresses, and territories.]
+* **`orders`** - [Records details of sales transactions like order dates, delivery dates, and shipping status.]
+* **`orderdetails`** - [Stores the specific quantity, pricing, and products for individual sales orders.]
+* **`payments`** - [Tracks monetary transactions, check numbers, payment dates, and outstanding balance credits.]
+* **`products`** - [A catalog of inventory with stock numbers, vendor names, buy prices, and MSRP prices.]
+* **`product lines`** - [Defines product categories alongside text or HTML descriptions and images.]
 
 ## Demonstration Queries
 
