@@ -1,6 +1,6 @@
 # automatic-potato
-## Commercial Operations & Database Optimization Demo 
-**by Christian Glakas**
+## MySQL Portfolio Project: Commercial Operations & Database Optimization  
+by **Christian Glakas**
 
 A comprehensive, production-ready SQL portfolio spanning five architectural domains. This repository showcases how targeted database engineering, query optimization, and advanced analytics transform raw relational schemas into highly performant, executive-ready commercial business intelligence.
 
