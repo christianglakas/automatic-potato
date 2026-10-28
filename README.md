@@ -202,4 +202,129 @@ ORDER BY max_amount_paid DESC
 LIMIT 5;
 ```
 
-*(Tip for the user: Paste your exact SQL query code blocks beneath each bullet point to show off your code directly in the README!)*
+### Category 3: HIGHER ORDER BUSINESS INTERSECTIONS & DATA MANIPULATION
+
+* **Query 1: Total Payments & Items Ordered**
+```mysql
+SELECT
+    pay_summary.customerNumber,
+    pay_summary.total_paid,
+    order_summary.total_items_ordered
+FROM (
+	SELECT customerNumber, SUM(amount) AS total_paid
+	FROM payments 
+	GROUP BY customerNumber
+) pay_summary 
+INNER JOIN (
+	SELECT o.customerNumber, SUM(quantityOrdered) AS total_items_ordered
+    FROM orders o
+    INNER JOIN orderdetails od ON o.orderNumber = od.orderNumber
+    GROUP BY o.customerNumber
+) order_summary ON pay_summary.customerNumber = order_summary.customerNumber
+LIMIT 10;
+```
+
+* **Query 2: Identify High Volatility Accounts**
+```mysql
+SELECT
+    o.customerNumber,
+    c.customerName,
+    SUM(CASE WHEN o.status = "Shipped" THEN od.quantityOrdered * od.priceEach ELSE 0 END) AS total_spend,
+    SUM(CASE WHEN o.status = "Cancelled" THEN od.quantityOrdered * od.priceEach ELSE 0 END) AS total_cancelled_value
+FROM orders o
+	INNER JOIN orderDetails od
+		ON od.orderNumber = o.orderNumber
+	INNER JOIN customers c
+		ON c.customerNumber = o.customerNumber
+GROUP BY o.customerNumber,
+		 c.customerName
+HAVING total_cancelled_value > (total_spend * .20)   
+ORDER BY total_cancelled_value DESC;
+```
+
+* **Query 3: Corporate Hierarchical Reporting Matrix**
+```mysql
+SELECT
+    emp.employeeNumber AS staff_id,
+    CONCAT(emp.firstName, ' ', emp.lastName) AS staff_name,
+    emp.jobTitle AS staff_title,
+    CONCAT(mgr.firstName, ' ', mgr.lastName) AS supervisor_name,
+    mgr.employeeNumber AS supervisor_id
+FROM employees emp
+	LEFT JOIN employees mgr ON emp.reportsTo = mgr.employeeNumber
+LIMIT 10;
+```
+
+* **Query 4: Pricing Integrity Strategy Audits: Rogue Discounter Exception Report**
+```mysql
+SELECT
+    od.orderNumber,
+    c.customerName,
+    p.productCode,
+    LEFT(p.productName, 25) AS product_name,
+    p.MSRP,
+    od.priceEach AS final_sale_price,
+    ROUND((1 - (od.priceEach / p.MSRP)) * 100, 5) AS exact_discount_percent
+FROM orderDetails od
+	INNER JOIN products p
+		ON od.productCode = p.productCode
+        AND od.priceEach < (p.MSRP * 0.80)
+	INNER JOIN orders o 
+		ON o.orderNumber = od.orderNumber
+    INNER JOIN customers c 
+		ON c.customerNumber = o.customerNumber
+ORDER BY exact_discount_percent DESC
+LIMIT 10;
+```
+
+* **Query 5: Global Supply Chain Footprint & Logistics Mapping**
+```mysql
+SELECT
+    CASE
+		WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
+		WHEN country IN('USA', 'Canada') THEN 'North America'
+		WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'        	
+        ELSE 'Other Regions'
+	END AS continent,
+    country,
+    city,
+    'Customer Contact' AS contact_type
+FROM customers
+UNION
+SELECT
+    CASE
+		WHEN country IN('France', 'Germany', 'UK', 'Spain', 'Italy', 'Austria', 'Belgium', 'Norway', 'Sweden', 'Switzerland', 'Finland', 'Denmark', 'Ireland', 'Netherlands', 'Portugal', 'Poland') THEN 'Europe'
+		WHEN country IN('USA', 'Canada') THEN 'North America'
+		WHEN country IN('Australia', 'New Zealand', 'Singapore', 'Japan', 'Hong Kong') THEN 'Asia-Pacific'        	
+        ELSE 'Other Regions'
+	END AS continent,
+    country,
+    city,
+    'Corporate Office' AS contact_type
+FROM offices
+ORDER BY continent, country, contact_type DESC
+LIMIT 15;
+```
+
+* **Query 6: Strategic Commercial Expansion & VIP Credit Loyalty Simulation**
+```mysql
+START TRANSACTION;
+
+SET SQL_SAFE_UPDATES = 0;
+
+INSERT INTO offices (officeCode, city, phone, addressLine1, country, postalCode, territory)
+VALUES ('8', 'Austin', '+1 512 555 0199', '101 Woodstream Blvd', 'USA', '78756', 'NA');
+
+UPDATE customers
+SET creditLimit = creditLimit * 1.15
+WHERE customerNumber IN (
+	SELECT DISTINCT customerNumber
+    FROM payments
+    WHERE amount > 50000
+); 	
+
+SET SQL_SAFE_UPDATES = 1;
+
+ROLLBACK;
+```
+
