@@ -29,7 +29,7 @@ Follow these steps to import the database structure and sample data.
    mysql -u root -p
    ```
 3. Create the target database and exit:
-   ```sql
+   ```mysql
    CREATE DATABASE classicmodels;
    EXIT;
    ```
@@ -43,10 +43,10 @@ Follow these steps to import the database structure and sample data.
 2. Go to the top menu and select **File** ➔ **Open SQL Script...**
 3. Select `01_classicmodels_schema.sql` from your local machine.
 4. The script contains a `CREATE DATABASE` statement at the top on line 8:
-   ```sql
-   CREATE DATABASE IF NOT EXISTS classicmodels;
-   USE classicmodels;
-   ```
+```sql
+CREATE DATABASE IF NOT EXISTS classicmodels;
+USE classicmodels;
+```
 5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
 
 ## Database Schema Overview
