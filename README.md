@@ -67,7 +67,7 @@ The imported database consists of the following tables, built to demonstrate sta
 
 Below are the queries included in this project, categorized by purpose. They demonstrate proficiency in data query performance engineering, dynamic executive dashboarding, advanced data governance, program performance evaluation, and zero-footprint risk management.
 
-To view these queries with additional information on the business goals prompting them and the SQL commands they include, along with formatted results and analysis, download the file `02_demo_SQL_queries.sql` from the FILES menu.
+To view these queries with additional information on the business goals prompting them and the specific SQL clauses they include, along with formatted results and analysis, download the file `02_demo_SQL_queries.sql` from the FILES menu on this GitHub page.
 
 ### Category 1: Environment Setup & Lookup Architecture
 
