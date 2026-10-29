@@ -38,14 +38,15 @@ Follow these steps to import the database structure and sample data.
 
 ### Option 2: Via MySQL Workbench
 1. Open MySQL Workbench and connect to your database instance.
-2. Go to the top menu and select **File** ➔ **Open SQL Script...**
-3. Select `01_classicmodels_schema.sql` from your local machine.
-4. The script contains a `CREATE DATABASE` statement at the top on line 8:
+2. Download the file `01_classicmodels_schema.sql` from this FILES menu on this page to your local machine.
+3. Go to the top menu and select **File** ➔ **Open SQL Script...**
+4. Select `01_classicmodels_schema.sql` from your local machine.
+5. The script contains a `CREATE DATABASE` statement at the top on line 8:
    ```sql
    CREATE DATABASE IF NOT EXISTS classicmodels;
    USE classicmodels;
    ```
-5. Click the **Lightning Bolt icon** (Execute) to run the entire script.
+6. Click the **Lightning Bolt icon** (Execute) to run the entire script.
 
 ## Database Schema Overview
 
