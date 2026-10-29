@@ -6,7 +6,7 @@ Christian Glakas
 	Database: MySQL Sample Database classicmodels
 	Source: http://www.mysqltutorial.org/mysql-sample-database.aspx
 
-Author's NOTE: I downloaded this script from the website above but had to revised it to
+Author's NOTE: I downloaded this script from the website above but revised it to
 include two commands on lines 24 and 38, denoted with a commented-out '**' beneath 
 each, to first disable the foreign key checks before dropping any existing instances of 
 the tables, and then to re-enable the foreign key checks afterwards. This was necessary  
