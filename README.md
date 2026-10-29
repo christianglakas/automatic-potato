@@ -38,7 +38,7 @@ Follow these steps to import the database structure and sample data.
 
 ### Option 2: Via MySQL Workbench
 1. Open MySQL Workbench and connect to your database instance.
-2. Download the file `01_classicmodels_schema.sql` from the FILES menu on this page to your local machine.
+2. From the FILES menu on this page, download the file `01_classicmodels_schema.sql` to your local machine.
 3. Go to the top menu and select **File** ➔ **Open SQL Script...**
 4. Select `01_classicmodels_schema.sql` from your local machine.
 5. The script contains a `CREATE DATABASE` statement at the top on line 8:
@@ -66,6 +66,8 @@ The imported database consists of the following tables, built to demonstrate sta
 ### Project Architecture & Framework
 
 Below are the queries included in this project, categorized by purpose. They demonstrate proficiency in data query performance engineering, dynamic executive dashboarding, advanced data governance, program performance evaluation, and zero-footprint risk management.
+
+To view these queries with additional information on the business goals prompting them and the SQL commands they include, along with formatted results and analysis, download the file `02_demo_SQL_queries.sql` from the FILES menu.
 
 ### Category 1: Environment Setup & Lookup Architecture
 
